@@ -13,3 +13,9 @@ variable "aws_region" {
   description = "Region"
   type        = string
 }
+
+variable "instance_type" {
+  description = "Instance Type"
+  type        = string
+  default     = "t3.micro"
+}
