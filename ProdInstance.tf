@@ -1,13 +1,14 @@
 #Creating instance for each services seperately for security and redundancy
 
 resource "aws_instance" "jenkins" {
-  ami = "ami-07c8c1b18ca66bb07"
+  #ami = "ami-0e2c8caa4b6378d8c"
+  ami = var.ami
   //count = 2
   instance_type = var.instance_type
   #vpc_security_group_ids = [data.aws_security_group.launch_wizard_1.id]
   subnet_id              = aws_subnet.public1.id
   vpc_security_group_ids = [aws_security_group.JenkinsSG.id]
-  key_name               = "testpair"
+  #key_name               = "testpair"
 
   root_block_device {
     volume_size = var.Instance_volume
@@ -20,13 +21,14 @@ resource "aws_instance" "jenkins" {
 }
 
 resource "aws_instance" "SAST" {
-  ami = "ami-07c8c1b18ca66bb07"
+  #ami = "ami-0e2c8caa4b6378d8c"
+  ami = var.ami
   //count = 2
   instance_type = var.instance_type
   #vpc_security_group_ids = [data.aws_security_group.launch_wizard_1.id]
   subnet_id              = aws_subnet.public1.id
   vpc_security_group_ids = [aws_security_group.SASTsg.id]
-  key_name               = "testpair"
+  #key_name               = "testpair"
 
   root_block_device {
     volume_size = var.Instance_volume
@@ -39,13 +41,14 @@ resource "aws_instance" "SAST" {
 }
 
 resource "aws_instance" "Monitoring" {
-  ami = "ami-07c8c1b18ca66bb07"
+  #ami = "ami-0e2c8caa4b6378d8c"
+  ami = var.ami
   //count = 2
   instance_type = var.instance_type
   #vpc_security_group_ids = [data.aws_security_group.launch_wizard_1.id]
   subnet_id              = aws_subnet.public1.id
   vpc_security_group_ids = [aws_security_group.Monitoringsg.id]
-  key_name               = "testpair"
+  #key_name               = "testpair"
 
   root_block_device {
     volume_size = var.Instance_volume

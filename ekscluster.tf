@@ -6,7 +6,7 @@ module "eks" {
   version = "20.8.5"
 
   cluster_name    = "Test-cluster" #name can be dynamic
-  cluster_version = "1.29" #version can be made dynamic
+  cluster_version = "1.29"         #version can be made dynamic
 
   cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
@@ -20,7 +20,8 @@ module "eks" {
   #vpc_id     = module.vpc.vpc_id
   vpc_id = aws_vpc.web.id #Our private vpc created without a module
   #subnet_ids = module.vpc.private_subnets
-  subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id] #place in private subnet
+  #subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id] #place in private subnet
+  subnet_ids = [aws_subnet.private1.id, aws_subnet.private2.id] #always create NAT when assigning with private subnet orelse the nodegroup will not be attached to the nodes, because the private instance needs to pull images to run containers
 
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
@@ -31,8 +32,8 @@ module "eks" {
     one = {
       name = "node-group-1"
 
-      instance_types = ["t3.medium"]
-    
+      instance_types = ["t2.medium"]
+
       #This will create a ASG
       min_size     = 1
       max_size     = 3

@@ -19,3 +19,7 @@ variable "instance_type" {
   type        = string
   default     = "t3.micro"
 }
+
+variable "ami" {
+  type = string
+}
