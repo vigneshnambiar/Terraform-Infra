@@ -51,11 +51,11 @@ resource "aws_security_group" "privatesg" {
   vpc_id      = aws_vpc.web.id
 
   ingress {
-    description = "Allowing SSH traffic"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    security_groups =   [aws_security_group.BastonHoste.id] #mapping the baston sec group
+    description     = "Allowing SSH traffic"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    security_groups = [aws_security_group.BastonHoste.id] #mapping the baston sec group
   }
 
   tags = {
